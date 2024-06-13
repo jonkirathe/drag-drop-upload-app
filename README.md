@@ -1,5 +1,23 @@
 # DragDropUploadApp
 
+## UploadComponent:
+- Allows users to select or drag and drop images.
+- Provides a drag-and-drop zone and a file input field.
+- Emits an event when new images are uploaded.
+
+## PreviewComponent:
+- Displays a preview of uploaded images.
+- Utilizes Angular’s CDK Drag and Drop module for rearranging images.
+- Renders images in a responsive grid layout.
+
+## AppComponent:
+- Manages image state and passes it to the PreviewComponent.
+- Handles image uploads using Angular signals.
+- Includes placeholder, loading, and defer directives for a better user experience.
+
+Overall, your app seems well-designed for image-centric use cases.
+
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.3.
 
 ## Development server
