@@ -1,5 +1,7 @@
 # DragDropUploadApp
 
+Live: https://filedropapp.vercel.app/
+
 ## UploadComponent:
 - Allows users to select or drag and drop images.
 - Provides a drag-and-drop zone and a file input field.
