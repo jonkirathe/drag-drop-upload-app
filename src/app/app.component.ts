@@ -1,55 +1,41 @@
-import { Component, computed, OnInit, signal } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-
-interface User {
-  id: number;
-  name: string;
-  email: string;
-}
+import { UploadComponent } from './components/upload/upload.component';
+import { PreviewComponent } from './components/preview/preview.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, UploadComponent, PreviewComponent],
   template: `
-  <h1>{{ title }}</h1>
-  <p>User Count: {{ userCount() }}</p>`,
-  styleUrl: './app.component.scss',
+    <div class="container p-5">
+      <upload (uploadedImagesChange)="onUploadedImagesChange($event)"></upload>
+      @defer (on viewport) {
+      <!-- <preview [previewTemplate]="imagePreviewTemplate" [images]="images()"> -->
+      <preview [images]="images()">
+        <h3 class="text-center">Beautiful Draggable Images Preview</h3>
+        <ng-template #imagePreviewTemplate let-title let-name="name">
+          <div class="text-center">
+          <h2>{{title}}</h2>
+          <h4>{{name}}</h4>
+          </div>
+        </ng-template>
+      </preview>
+      } @placeholder {
+      <h2 class="text-center">multiple images</h2>
+      } @loading (minimum 1s) {
+      <h2 class="text-center">loading...</h2>
+      }
+    </div>
+  `,
+  styles: []
 })
 export class AppComponent implements OnInit {
-  title = 'drag-drop-upload-app';
-  private users = signal<User[]>([]);
-  userCount = computed(() => this.users().length);
+  images = signal<{ url: string }[]>([]);
 
-  ngOnInit(): void {
-    this.users.set([{ id: 1, name: 'john', email: 'john@mail.com' }]);
+  ngOnInit(): void {}
 
-    this.users.update((users: User[]) => [
-      ...users,
-      { id: 2, name: 'john2', email: 'john2@mail.com' },{ id: 3, name: 'john', email: 'john@mail.com' }
-    ]);
-
-    this.users.update((users: User[]) =>
-      users.map((user) => {
-        if (user.id === 1) {
-          user.email = 'j@mail.com';
-        }
-        return user;
-      })
-    );
-
-    console.log('userCount: ', this.userCount());
-
-    const showCount = signal(true);
-    const count = signal(10);
-    const conditionalCount = computed(() => {
-      if (showCount()) {
-        return `The count is ${count()}.`;
-      } else {
-        return 'Nothing to see here!';
-      }
-    });
-
-    console.log('conditionalCount: ', conditionalCount());
+  onUploadedImagesChange(uploadedImages: { url: string }[]): void {
+    this.images.set(uploadedImages);
   }
 }
