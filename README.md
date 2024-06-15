@@ -20,7 +20,6 @@ Live: https://filedropapp.vercel.app/
 Overall, your app seems well-designed for image-centric use cases.
 
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.3.
 
 ## Development server
 
