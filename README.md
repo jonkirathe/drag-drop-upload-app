@@ -1,5 +1,7 @@
 # DragDropUploadApp
 
+[![Love Angular badge](https://img.shields.io/badge/angular-love-blue?logo=angular&angular=love)](https://www.github.com/angular/angular)
+
 Live: [DragDropUploadApp](https://filedropapp.vercel.app/)
 
 ## Overview
